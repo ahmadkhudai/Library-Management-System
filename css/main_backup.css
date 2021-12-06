@@ -1,0 +1,86 @@
+/* General CSS STYLES */
+
+body {
+  box-sizing: border-box;
+  font-family: "Lucida Console", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  /* padding: 10px; */
+  border: none;
+}
+
+button.navbar-toggler {
+  border: none;
+  font-size: 2em;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+.navbar-brand {
+  font-size: 1em;
+}
+
+.black-text {
+  color: #343434;
+}
+
+.red-text {
+  color: #d42020;
+}
+
+.light-grey-bkg {
+  background-color: #efefef;
+}
+
+.material-shadow {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+.navbar ul {
+  align-items: center;
+}
+
+.category-button {
+  display: inline-block;
+  background-color: #d42020;
+  color: white;
+  padding: 3px 8px;
+
+  vertical-align: middle;
+  border-radius: 5px;
+}
+
+.user-nav-items {
+  display: flex;
+  align-items: center;
+  margin: 0;
+}
+
+.user-nav-items i.fa-user {
+  padding: 25px;
+  border-radius: 50%;
+}
+
+.user-nav-items .fa-bell {
+  font-size: 1.6em;
+}
+
+#nav-search p {
+  margin: 0;
+}
+
+#nav-search a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#main-nav {
+  display: flex;
+  align-items: center;
+}

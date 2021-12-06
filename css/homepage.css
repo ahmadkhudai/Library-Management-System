@@ -1,0 +1,17 @@
+#login-notice {
+  /* padding: 20px; */
+  margin: auto;
+}
+
+#login-notice a {
+  margin: 5px;
+  padding: 15px;
+  color: black;
+  /* background-color: var(--ak-primary); */
+  display: flex;
+  align-items: center;
+  box-shadow: var(--weird-shadow);
+}
+
+/* #main-view-panel div {
+} */

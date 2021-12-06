@@ -1,0 +1,251 @@
+/*--------------------------------------- MAIN NAV */
+#main-nav nav {
+  /* background-color: var(--darker-black); */
+  /* box-shadow: 2px 2px black; */
+  /* border-radius: 5px; */
+  border: 1px solid var(--ak-secondary);
+  box-shadow: var(--weird-shadow);
+}
+#main-nav .nav-link {
+  color: var(--ak-primary);
+}
+
+#main-nav .user-nav-items .fa-user {
+  /* color: white; */
+  box-shadow: var(--weird-shadow);
+}
+
+#main-nav figure,
+figure.user-face img {
+  vertical-align: top;
+  background-color: var(--blue);
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  margin: 0;
+  padding: 0;
+}
+
+@media (max-width: 367px) {
+  #main-nav nav {
+    padding: 5px;
+  }
+
+  #main-nav a img {
+    width: 80%;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+/* -------------------------------------SEARCH BAR */
+
+#search-bar {
+  width: 80%;
+  max-width: 600px;
+  transition: all 0.3s;
+}
+#search-bar form {
+  /* background-color: var(--darker-black); */
+  /* color: white; */
+  /* border-radius: 10px; */
+  box-shadow: var(--weird-shadow);
+}
+
+#search-bar form * {
+  padding: 0;
+  margin: 0;
+  /* color: white; */
+}
+
+#search-area {
+  background-color: var(--ak-primary);
+  border-radius: 10px;
+  padding: 0;
+  width: 100%;
+  color: white;
+}
+
+#search-area::placeholder {
+  color: white;
+}
+
+#search-suggestion img {
+  width: 70px;
+}
+/* #search-suggestion::-we */
+
+#search-suggestion::-webkit-scrollbar {
+  width: 5px; /* for vertical scrollbars */
+  height: 12px; /* for horizontal scrollbars */
+}
+
+#search-suggestion::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+#search-suggestion::-webkit-scrollbar-thumb {
+  background: var(--ak-primary);
+}
+
+#search-suggestion {
+  overflow-y: scroll;
+  scrollbar-color: var(--ak-primary) rgb(241, 241, 241);
+  scrollbar-width: thin;
+  max-height: 350px;
+  font-size: 10px;
+  z-index: 20;
+  background-color: rgba(255, 255, 255, 0);
+  width: 100%;
+  box-shadow: 2px 2px rgba(0, 0, 0, 0.158);
+  transition: all 0.4s;
+  display: none;
+}
+
+#search-suggestion .search-suggestion-item {
+  background-color: white;
+
+  border: 1px solid rgb(148, 148, 148);
+  border-radius: 10px;
+}
+
+#search-suggestion .search-suggestion-item a {
+  width: 50%;
+  border-radius: 10px;
+  background: var(--ak-primary);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#search-suggestion .item-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#search-suggestion .item-info .title {
+  font-weight: bold;
+}
+
+/* -------------------------------------PAGE BANNER */
+
+#page-banner > div {
+  box-shadow: var(--weird-shadow);
+}
+
+#page-banner > div h1 {
+  font-weight: 600;
+}
+
+/* -------------------------------------BOOK-CARD */
+
+.book {
+  /* margin: 0; */
+}
+.book {
+  border-radius: 10px;
+  border: 1px solid var(--ak-secondary);
+  /* padding: 10px; */
+
+  box-shadow: var(--weird-shadow);
+}
+
+.book button {
+  border: none;
+  display: block;
+  /* color: white; */
+  /* background-color: var(--blue); */
+  color: var(--red);
+  width: 100%;
+  text-align: center;
+  margin: 1em 0;
+  /* border-radius: 20px; */
+}
+
+.book button:hover {
+  box-shadow: var(--weird-shadow);
+}
+
+.book figure {
+  background-color: var(--blue);
+  height: 227.2px;
+  width: 142px;
+  max-width: 142px;
+  margin: 0;
+  padding: 0;
+}
+
+@media (max-width: 600px) {
+  .book figure {
+    width: 90px;
+    height: 144px;
+    max-width: 90px;
+  }
+}
+
+.book {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ---------------------------------------MISC */
+.banner {
+  box-shadow: var(--weird-shadow);
+}
+
+/* --------------------------------------RELATED BOOKS */
+.related-books {
+  /* max-height: ; */
+  /* border: 1px solid black; */
+  /* box-shadow: var(--weird-shadow); */
+}
+
+.related-books .scrollpane {
+  height: 400px;
+  overflow-y: scroll;
+  scrollbar-width: 2px;
+}
+
+.related-books .smol-book figure img {
+  max-width: 200px;
+}
+
+.related-books .scrollpane::-webkit-scrollbar {
+  width: 5px; /* for vertical scrollbars */
+  height: 12px; /* for horizontal scrollbars */
+}
+
+.related-books .scrollpane::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.related-books .scrollpane::-webkit-scrollbar-thumb {
+  background: var(--ak-primary);
+}
+
+/* ---------------------------------------smol book */
+
+@media (max-width: 500px) {
+  .smol-book {
+    font-size: 0.8em;
+    padding: 0;
+    display: flex;
+    align-items: center;
+  }
+
+  .smol-book p {
+    padding-left: 10px;
+    text-align: left;
+  }
+  .smol-book img {
+    padding: 5px;
+  }
+}
+
+.smol-book img {
+  padding: 10px;
+}

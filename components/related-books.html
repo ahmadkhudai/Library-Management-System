@@ -1,0 +1,59 @@
+<style>
+  .related-books {
+    /* max-height: ; */
+    border: 1px solid black;
+    box-shadow: var(--weird-shadow);
+  }
+
+  .related-books .scrollpane {
+    height: 400px;
+    overflow-y: scroll;
+    scrollbar-width: 2px;
+  }
+
+  .related-books .smol-book figure img {
+    max-width: 200px;
+  }
+</style>
+
+<div class="related-books col-12 row p-3 justify-content-center mx-auto">
+  <div class="col-12 col-md-8 pt-1 my-4 text-center">
+    <h2>More Books by Brandon Sanderson</h2>
+  </div>
+  <div class="scrollpane row col-12 justify-content-center">
+    <div class="row col-12 col-sm-8 text-center">
+      <div
+        class="smol-book text-center col-10 col-sm-6 col-md-4 col-lg-3 mx-auto my-2"
+      >
+        <figure>
+          <img
+            src="https://picsum.photos/100/160"
+            alt="Book Cover"
+            height="100%"
+            width="100%"
+          />
+        </figure>
+        <div>
+          <p class="red-text" class="book-title">The Way of Kings</p>
+          <p class="author">Brandon Sanderson</p>
+        </div>
+      </div>
+      <div
+        class="smol-book text-center col-10 col-sm-6 col-md-4 col-lg-3 mx-auto my-2"
+      >
+        <figure>
+          <img
+            src="https://picsum.photos/100/160"
+            alt="Book Cover"
+            height="100%"
+            width="100%"
+          />
+        </figure>
+        <div>
+          <p class="red-text" class="book-title">The Way of Kings</p>
+          <p class="author">Brandon Sanderson</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

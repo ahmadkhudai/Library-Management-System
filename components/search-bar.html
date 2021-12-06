@@ -1,0 +1,265 @@
+<div id="search-bar" class="mx-auto">
+  <form
+    action="./search.php"
+    method="get"
+    class="row mx-auto pt-3 pb-3 align-content-center justify-content-center"
+  >
+    <h2 class="col-10 col-md-3 my-2 my-md-0 text-center">SEARCH</h2>
+    <input
+      class="col-10 col-md-7 py-2 py-md-0 text-center"
+      type="text"
+      placeholder="Type something here..."
+      name="search-area"
+      id="search-area"
+      autocomplete="off"
+    />
+
+    <div id="search-suggestion" class="position-absolute text-center"></div>
+    <input type="submit" value="" />
+    <button class="pr-4 pl-4 my-2 my-md-0 text-center col-10 col-md-2">
+      <i class="fa fa-search"></i>
+    </button>
+  </form>
+</div>
+
+<script>
+  $(document).ready(function () {
+    refreshSuggestion();
+
+    let currentSearchAreaPos = document
+      .getElementById("search-area")
+      .getBoundingClientRect();
+
+    jQuery.fn.onPositionChanged = function (trigger, millis) {
+      if (millis == null) millis = 100;
+      var o = $(this[0]); // our jquery object
+      if (o.length < 1) return o;
+
+      var lastPos = null;
+      var lastOff = null;
+      setInterval(function () {
+        if (o == null || o.length < 1) return o; // abort if element is non existend eny more
+        if (lastPos == null) lastPos = o.position();
+        if (lastOff == null) lastOff = o.offset();
+        var newPos = o.position();
+        var newOff = o.offset();
+        if (lastPos.top != newPos.top || lastPos.left != newPos.left) {
+          $(this).trigger("onPositionChanged", {
+            lastPos: lastPos,
+            newPos: newPos,
+          });
+          if (typeof trigger == "function") trigger(lastPos, newPos);
+          lastPos = o.position();
+        }
+        if (lastOff.top != newOff.top || lastOff.left != newOff.left) {
+          $(this).trigger("onOffsetChanged", {
+            lastOff: lastOff,
+            newOff: newOff,
+          });
+          if (typeof trigger == "function") trigger(lastOff, newOff);
+          lastOff = o.offset();
+        }
+      }, millis);
+
+      return o;
+    };
+
+    $("#search-area").onPositionChanged(function () {
+      refreshSuggestion();
+    });
+
+    // Get the input box
+    let input = document.getElementById("search-area");
+
+    // Init a timeout variable to be used below
+    let timeout = null;
+    let mytimeout = null;
+
+    // Listen for keystroke events
+    if (input !== null) {
+      input.addEventListener("keyup", function (e) {
+        $("#search-suggestion").removeClass("d-block");
+        // Clear the timeout if it has already been set.
+        // This will prevent the previous task from executing
+        // if it has been less than <MILLISECONDS>
+        clearTimeout(mytimeout);
+        clearTimeout(timeout);
+
+        // Make a new timeout set to go off in 1000ms (1 second)
+        timeout = setTimeout(function () {
+          if (input.value.length <= 2) {
+            clearTimeout(timeout);
+            return;
+          }
+          refreshSuggestion();
+          $("#search-suggestion").addClass("d-block").focus();
+          let inVal = input.value;
+          console.log("Searching for:" + inVal);
+
+          getRes(inVal);
+
+          clearTimeout(mytimeout);
+          resetFocusTimeout();
+
+          // searchSuggest(inVal);
+        }, 350);
+      });
+    }
+
+    function resetFocusTimeout() {
+      clearTimeout(mytimeout);
+
+      mytimeout = setTimeout(() => {
+        $("#search-suggestion").removeClass("d-block");
+      }, 2500);
+    }
+
+    // $("#search-suggestion").ho
+
+    $("#search-suggestion").focus(function () {
+      // resetFocusTimeout();
+      clearTimeout(mytimeout);
+    });
+
+    $("#search-suggestion").scroll(function () {
+      resetFocusTimeout();
+      // clearTimeout(mytimeout);
+    });
+
+    $("#search-suggestion").mouseover(function () {
+      // resetFocusTimeout();
+      clearTimeout(mytimeout);
+      // $(this).css("background-color", "rgb(242, 242, 0)");
+    });
+
+    $("#search-suggestion").click(function () {
+      // resetFocusTimeout();
+      clearTimeout(mytimeout);
+      // $(this).css("background-color", "rgb(242, 242, 0)");
+    });
+
+    $("#search-suggestion").blur(function () {
+      // $(this).css("background-color", "white");
+      resetFocusTimeout();
+    });
+
+    $("#search-suggestion").focusout(function () {
+      console.log("focus out!");
+      // $(this).css("background-color", "white");
+      resetFocusTimeout();
+    });
+
+    $("#search-suggestion").mouseleave(function () {
+      // $(this).css("background-color", "white");
+      resetFocusTimeout();
+    });
+
+    $(document).on("click", function (event) {
+      var $trigger = $("#search-suggestion");
+      if ($trigger !== event.target && !$trigger.has(event.target).length) {
+        clearTimeout(mytimeout);
+        $("#search-suggestion").removeClass("d-block");
+      }
+    });
+
+    function refreshSuggestion() {
+      let searchSuggest = document.getElementById("search-suggestion");
+      let searchArea = document.getElementById("search-area");
+
+      searchSuggest.clientWidth = searchArea.clientWidth;
+      // searchSuggest.offsetTop = searchArea.getBoundingClientRect
+
+      // searchSuggest.querySelector("img").width = 100;
+
+      if (
+        Math.abs(parseInt(searchSuggest.offsetLeft) - searchArea.offsetLeft) >
+        10
+      ) {
+        searchSuggest.style.left = searchArea.offsetLeft + "px";
+        searchSuggest.style.top =
+          searchArea.offsetTop + searchArea.offsetHeight + "px";
+        searchSuggest.style.width = searchArea.offsetWidth + "px";
+        // console.log("RESIZED!");
+      } else {
+        // console.log("NOT RESIZING!");
+      }
+    }
+
+    //magic
+    async function getRes(str) {
+      // event.preventDefault();
+      if (str.length < 2) {
+        $("#search-suggestion").removeClass("d-block");
+      }
+      postData("./api/searchSuggest.php", str).then((data) => {
+        populateSuggestion(data);
+      });
+    }
+
+    function populateSuggestion(data) {
+      let suggestionBox = document.getElementById("search-suggestion");
+
+      suggestionBox.innerHTML = "";
+      if (data === "error") {
+        return;
+      }
+
+      for (let prop in data) {
+        let newSuggestion = document.createElement("div");
+        newSuggestion.classList.add(
+          "search-suggestion-item",
+          "row",
+          "m-1",
+          "p-2"
+        );
+        newSuggestion.innerHTML = getSuggestionTemplate(
+          data[prop][1],
+          data[prop][2],
+          data[prop][3],
+          data[prop][3]
+        );
+        suggestionBox.append(newSuggestion);
+
+        // console.log(prop, data[prop][1]);
+      }
+
+      //1 title
+      //2 author
+      //3 isbn
+      //4 publisher
+      //5 amount
+    }
+
+    function getSuggestionTemplate(title, author, img, isbn) {
+      if (title.length > 20) {
+        title =
+          title.substring(0, 20) +
+          "..." +
+          title.substring(title.length - 10, title.length);
+      }
+
+      return `
+      <figure class="col-12 col-sm-3 col-md-4">
+        <img src=${
+          img === isbn
+            ? "http://covers.openlibrary.org/b/isbn/" +
+              isbn +
+              "-M.jpg?default=false"
+            : img
+        } onerror="this.onerror=null;this.src='https://picsum.photos/100/160';" alt="Book Cover" />
+      </figure>
+      <div class="item-info col-12 col-sm-6 col-md-5 text-left">
+        <p class="title  ">${title}</p>
+        <p class="text-center text-sm-left">${author}</p>
+      </div>
+      <a
+        href="./bookView.php?current-book=${isbn}"
+        class="col-12 col-sm-3"
+      >
+        <p>VIEW</p>
+        <p>-></p>
+      </a>
+  `;
+    }
+  });
+</script>

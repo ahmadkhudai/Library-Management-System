@@ -1,0 +1,35 @@
+.red-bar {
+  height: 23px;
+  width: 100%;
+  background-color: var(--red);
+}
+
+#sorting-bar {
+  background: black;
+  color: white;
+}
+
+#sorting-bar * {
+  color: white;
+}
+
+/* 
+#sorting-bar ul {
+  background-color: black;
+  display: flex;
+  color: white;
+  margin-right: 0;
+  align-items: flex-start;
+}
+
+#sorting-bar li {
+  padding: 5px;
+  margin-left: 1em;
+
+  /* background-color: white; 
+  margin-right: 0;
+}
+#sorting-bar button {
+  background-color: black;
+  color: white;
+} */

@@ -1,0 +1,10 @@
+
+{
+    "liveServer.settings.useWebExt": true,
+    "editor.lineNumbers": "on",
+    "editor.fontFamily": "Lucida Console, 'Courier New', monospace",
+    "editor.fontSize": 18,
+    "liveServer.settings.port": 5501,
+    "workbench.editor.limit.enabled": true,
+    "workbench.editor.limit.value": 4
+}

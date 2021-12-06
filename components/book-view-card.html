@@ -1,0 +1,51 @@
+<style></style>
+<div id="book-card-view">
+  <div class="my-3 row p-3 align-items-center">
+    <figure class="col-4">
+      <img
+        src="https://picsum.photos/100/160"
+        alt="Book Cover"
+        height="100%"
+        width="100%"
+      />
+    </figure>
+    <div class="col-8 col-md-4">
+      <h1 class="red-text" class="book-title">The Way of Kings</h1>
+      <p class="author">Brandon Sanderson</p>
+      <p class="category">Category: Fantasy, Fiction, High-Fantasy</p>
+    </div>
+    <div
+      class="col-sm-12 col-md-4 ml-auto text-center row justify-content-center"
+    >
+      <p class="col-8">Amount: 1</p>
+      <button
+        id="borrow-btn"
+        class="col-8 ak-button ak-blue-bkg"
+        onclick="borrowBook()"
+      >
+        Borrow
+      </button>
+      <button
+        id="reserve-btn"
+        class="col-8 ak-button ak-blue-bkg"
+        onclick="reserveBook()"
+      >
+        Reserve
+      </button>
+      <button
+        id="return-btn"
+        class="col-8 ak-button ak-red-bkg d-none"
+        onclick="resetButtons()"
+      >
+        Return
+      </button>
+      <button
+        id="cancel-btn"
+        class="col-8 ak-button ak-red-bkg d-none"
+        onclick="resetButtons()"
+      >
+        Cancel
+      </button>
+    </div>
+  </div>
+</div>
